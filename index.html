@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posong Camp Premium - Booking System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hijau-botol': '#1F4D36',
+                        'hijau-soft': '#ABD5BA',
+                        'orange-camp': '#FF6B00',
+                        'shopee-orange': '#FF4500',
+                        'bg-light': '#F3F7F5'
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 30px -5px rgba(31, 77, 54, 0.07), 0 4px 12px -2px rgba(31, 77, 54, 0.04)',
+                        'hover-card': '0 20px 40px -5px rgba(31, 77, 54, 0.12), 0 8px 20px -4px rgba(31, 77, 54, 0.06)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F3F7F5; scroll-behavior: smooth; }
+        .modal-scroll::-webkit-scrollbar { width: 6px; }
+        .modal-scroll::-webkit-scrollbar-track { background: transparent; }
+        .modal-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 20px; }
+        .click-bouncy { transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .click-bouncy:active { transform: scale(0.94); }
+        .slide{ display:none; opacity:0;transition:opacity .8s ease-in-out;background-position:center center;background-repeat:no-repeat; background-size:100% 100% }
+        .slide.active{ display:flex; opacity:1;}
+    </style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <nav class="bg-hijau-botol text-white sticky top-0 z-40 shadow-premium bg-opacity-95 backdrop-blur-md border-b border-emerald-950 px-6">
+        <div class="container mx-auto py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+                <div class="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center border border-white/10 group-hover:bg-orange-camp transition-all duration-300">
+                    <i class="fa-solid fa-mountain-sun text-white text-sm group-hover:rotate-12 transition-transform"></i>
+                </div>
+                <span class="font-black text-xl tracking-tight">Posong<span class="text-orange-camp">Camp</span></span>
+            </div>
+            <div class="flex items-center gap-6 text-xs font-semibold tracking-wide">
+                <a href="#home" class="py-1 transition-colors hover:text-orange-camp">HOME</a>
+                <a href="#paket" class="py-1 transition-colors hover:text-orange-camp">PAKET CAMP</a>
+                <a href="#booking" class="py-1 transition-colors hover:text-orange-camp">RESERVASI</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        
+        <div id="home" class="relative w-full h-[70vh] bg-emerald-950 overflow-hidden flex items-center shadow-premium">
+                <div class="slide active absolute inset-0 flex-col justify-center px-8 md:px-24"style="background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.7)),url('f1.png');">                
+                    <div class="max-w-2xl text-white space-y-4">
+                    <span class="bg-white/10 backdrop-blur-md border border-white/20 text-orange-camp text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest inline-block">Samudra Awan Posong</span>
+                    <h1 class="text-3xl md:text-5xl font-black leading-tight">Terbangun di Antara Dua Gunung</h1>
+                    <p class="text-xs md:text-sm text-gray-200 font-light leading-relaxed max-w-lg">Rasakan sensasi magis membuka pintu tenda di pagi hari, langsung disambut fajar emas yang membelah lautan awan Gunung Sindoro & Sumbing.</p>
+                    <a href="#paket" class="bg-orange-camp hover:bg-orange-600 text-white text-xs font-bold px-6 py-3.5 rounded-xl shadow-lg transition-all tracking-wider inline-flex items-center gap-2 click-bouncy">
+                        Lihat Paket Tenda <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+            
+                <div class="slide absolute inset-0 flex-col justify-center px-8 md:px-24"style="background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.7)),url('f4.png');">
+                <div class="max-w-2xl text-white space-y-4">
+                    <span class="bg-white/10 backdrop-blur-md border border-white/20 text-shopee-orange text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest inline-block">Premium BBQ Grill</span>
+                    <h1 class="text-3xl md:text-5xl font-black leading-tight">Kehangatan Api Unggun & BBQ</h1>
+                    <p class="text-xs md:text-sm text-gray-200 font-light leading-relaxed max-w-lg">Nikmati malam penuh kehangatan ditemani hidangan grill premium di tengah sejuknya udara pegunungan alam bebas Posong.</p>
+                    <a href="#paket" class="bg-orange-camp hover:bg-orange-600 text-white text-xs font-bold px-6 py-3.5 rounded-xl shadow-lg transition-all tracking-wider inline-flex items-center gap-2 click-bouncy">
+                        Lihat Paket Tenda <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="slide absolute inset-0 flex-col justify-center px-8 md:px-24 " style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('f3.png');">
+                <div class="max-w-2xl text-white space-y-4">
+                    <span class="bg-white/10 backdrop-blur-md border border-white/20 text-teal-400 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest inline-block">Golden Sunrise Area</span>
+                    <h1 class="text-3xl md:text-5xl font-black leading-tight">Fajar Menakjubkan dari Lereng Gunung</h1>
+                    <p class="text-xs md:text-sm text-gray-200 font-light leading-relaxed max-w-lg">Saksikan keindahan fajar terbaik di Jawa Tengah yang perlahan muncul membelah kabut pagi pegunungan yang asri.</p>
+                    <a href="#paket" class="bg-orange-camp hover:bg-orange-600 text-white text-xs font-bold px-6 py-3.5 rounded-xl shadow-lg transition-all tracking-wider inline-flex items-center gap-2 click-bouncy">
+                        Lihat Paket Tenda <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <button class="absolute left-4 z-10 w-10 h-10 rounded-full bg-white/10 text-white hover:bg-orange-camp flex items-center justify-center border border-white/10 transition-all click-bouncy" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="absolute right-4 z-10 w-10 h-10 rounded-full bg-white/10 text-white hover:bg-orange-camp flex items-center justify-center border border-white/10 transition-all click-bouncy" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+        <section id="paket" class="container mx-auto px-6 py-12">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <h2 class="text-2xl md:text-3xl font-black text-hijau-botol tracking-tight">Pilihan Paket Camp Posong</h2>
+                <p class="text-xs text-gray-400 mt-1">Temukan pengalaman berkemah premium terbaik dengan keindahan pemandangan alam eksklusif Posong Temanggung.</p>
+            </div>
+
+            <div id="paketGridContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="booking" class="bg-white border-t border-gray-100 py-12 px-6">
+            <div class="container mx-auto max-w-5xl">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <h2 class="text-2xl md:text-3xl font-black text-hijau-botol tracking-tight">Formulir Reservasi Slot</h2>
+                    <p class="text-xs text-gray-400 mt-1">Sistem integrasi aman untuk mengamankan slot kapling tenda di Lereng Sindoro.</p>
+                </div>
+
+                <div id="receiptSection" class="hidden bg-gradient-to-br from-emerald-50 to-teal-50 border-2 border-dashed border-hijau-soft/60 rounded-[32px] p-6 md:p-8 max-w-2xl mx-auto mb-10 shadow-premium text-left animate-view">
+                    <div class="flex items-center gap-3 border-b border-dashed border-hijau-soft pb-4 mb-5">
+                        <i class="fa-solid fa-circle-check text-hijau-botol text-3xl"></i>
+                        <div>
+                            <h3 class="text-lg font-black text-hijau-botol">Pemesanan Berhasil Terkonfirmasi!</h3>
+                            <p class="text-[10px] text-gray-500 font-medium">Silakan tangkap layar (screenshot) bukti halaman invoice ini.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 text-xs font-medium text-gray-700">
+                        <div>
+                            <span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider block mb-1">KODE BOOKING UNIK:</span>
+                            <span id="rKode" class="text-lg font-black text-hijau-botol bg-white border border-hijau-soft px-4 py-2 rounded-xl inline-block tracking-widest shadow-inner">PSG-XXXXXX</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl border border-gray-100 space-y-1">
+                            <p class="text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-1 flex items-center gap-1"><i class="fa-solid fa-user text-orange-camp"></i> Data Diri Pemesan</p>
+                            <p>Nama Pelanggan: <strong id="rNama" class="text-gray-900"></strong></p>
+                            <p>No. WhatsApp: <strong id="rTelepon" class="text-gray-900"></strong></p>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl border border-gray-100 space-y-1">
+                            <p class="text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-1 flex items-center gap-1"><i class="fa-solid fa-tent text-orange-camp"></i> Rincian Paket & Akomodasi</p>
+                            <p>Paket Pilihan: <strong id="rPaket" class="text-gray-900"></strong></p>
+                            <p>Durasi Menginap: <strong id="rDurasi" class="text-gray-900"></strong></p>
+                            <p>Tanggal Check-in: <strong id="rTanggal" class="text-gray-900"></strong></p>
+                            <div class="mt-2 pt-2 border-t border-gray-100">
+                                <p class="text-[10px] font-bold text-gray-400 mb-1">Menu Tambahan BBQ:</p>
+                                <ul id="rBbqList" class="space-y-1"></ul>
+                            </div>
+                        </div>
+                        <p id="rCatatanBox" class="hidden bg-amber-50/50 border border-amber-100 p-3 rounded-xl italic text-gray-600"></p>
+                        
+                        <div class="bg-shopee-orange/5 border border-orange-200 p-4 rounded-2xl flex justify-between items-center">
+                            <span class="font-extrabold text-gray-800">Total Pembayaran:</span>
+                            <span id="rTotal" class="text-xl font-black text-shopee-orange">Rp 0</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl border border-yellow-200/60 bg-yellow-50/30 flex gap-2.5">
+                            <i class="fa-solid fa-circle-exclamation text-amber-500 text-sm mt-0.5"></i>
+                            <p class="text-[11px] leading-relaxed text-gray-600"><strong class="text-gray-900 block mb-0.5">Langkah Terakhir Pemesanan:</strong> Silakan kirim kode atau tangkap layar bukti booking ke WhatsApp Petugas untuk memvalidasi fisik tenda Anda di lokasi.</p>
+                        </div>
+                        <div class="flex justify-end gap-3 pt-2">
+                            <button onclick="window.location.reload()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-4 py-2.5 rounded-xl click-bouncy text-center">Buat Pesanan Baru</button>
+                            <a id="rWaBtn" href="#" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl shadow-md flex items-center gap-2 click-bouncy text-center">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Kirim ke WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-7 bg-bg-light border border-gray-100 rounded-[32px] p-6 md:p-8 shadow-premium">
+                        <form onsubmit="prosesFormBooking(event)" id="campForm" class="space-y-6 text-left">
+                            
+                            <div class="space-y-3">
+                                <h3 class="text-sm font-black text-hijau-botol tracking-wide uppercase border-b border-gray-200/60 pb-2 flex items-center gap-2"><i class="fa-solid fa-address-card text-orange-camp"></i> 1. Informasi Data Pengguna</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Nama Lengkap Pemesan</label>
+                                        <input type="text" id="fNama" required placeholder="Tulis nama sesuai KTP..." class="w-full bg-white border border-gray-200 px-3.5 py-3 rounded-xl text-xs outline-none focus:border-hijau-soft font-semibold transition-all shadow-sm">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">No. WhatsApp / Telp</label>
+                                        <input type="text" id="fTelepon" required placeholder="Contoh: 081234567xxx" class="w-full bg-white border border-gray-200 px-3.5 py-3 rounded-xl text-xs outline-none focus:border-hijau-soft font-semibold transition-all shadow-sm">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <h3 class="text-sm font-black text-hijau-botol tracking-wide uppercase border-b border-gray-200/60 pb-2 flex items-center gap-2"><i class="fa-solid fa-mountain-sun text-orange-camp"></i> 2. Detail Akomodasi & Tenda</h3>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Pilih Varian Tenda Premium</label>
+                                    <select id="paketSelect" onchange="updateSummary()" required class="w-full bg-white border border-gray-200 px-3.5 py-3 rounded-xl text-xs outline-none cursor-pointer font-semibold shadow-sm text-gray-700 focus:border-hijau-soft">
+                                        <option value="" data-price="0">-- Silakan Pilih Jenis Tenda --</option>
+                                    </select>
+                                </div>
+
+                                <div id="formBbqWrapper" class="bg-orange-50/40 border border-dashed border-shopee-orange/30 rounded-2xl p-4 transition-all">
+                                    <div class="text-shopee-orange font-bold text-xs flex items-center gap-1.5 mb-1">
+                                        <i class="fa-solid fa-fire-burner"></i> Tambah Set BBQ Grill (Opsional / Per Porsi)
+                                    </div>
+                                    <p class="text-[10px] text-gray-400 mb-3">Pilih set hidangan panggang untuk melengkapi malam sejuk di camping utama.</p>
+                                    <div id="formBbqItemsContainer" class="bg-white rounded-xl border border-orange-100 p-3 divide-y divide-orange-50 shadow-inner"></div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Durasi (Malam)</label>
+                                        <input type="number" id="fDurasi" min="1" value="1" oninput="updateSummary()" required class="w-full bg-white border border-gray-200 px-3.5 py-3 rounded-xl text-xs outline-none font-semibold transition-all shadow-sm">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Tanggal Check-In</label>
+                                        <input type="date" id="fTanggal" required class="w-full bg-white border border-gray-200 px-3.5 py-3 rounded-xl text-xs outline-none cursor-pointer font-semibold transition-all shadow-sm text-gray-700 focus:border-hijau-soft">
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Catatan Tambahan (Opsional)</label>
+                                    <textarea id="fCatatan" placeholder="Contoh: Minta tenda menghadap timur matahari terbit..." class="w-full bg-white border border-gray-200 px-3.5 py-2.5 rounded-xl text-xs outline-none font-medium h-20 resize-none focus:border-hijau-soft transition-all shadow-sm"></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-shopee-orange hover:bg-orange-600 text-white text-xs font-bold py-4 rounded-xl shadow-lg tracking-wider click-bouncy flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-lock-open"></i> SELESAIKAN & AMANKAN RESERVASI SLOT
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-white border border-gray-100 rounded-[32px] p-6 shadow-premium lg:sticky lg:top-24 space-y-5">
+                        <h3 class="text-sm font-black text-hijau-botol tracking-wide uppercase border-b border-gray-100 pb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-receipt text-hijau-botol"></i> Ringkasan Invoice Anda
+                        </h3>
+                        <div class="space-y-3 text-xs font-medium text-gray-600">
+                            <div class="flex justify-between items-start gap-4">
+                                <span>Jenis Paket:</span>
+                                <span id="sumPaket" class="font-bold text-gray-900 text-right max-w-[65%]">Menunggu pilihan...</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-gray-50 pt-2.5">
+                                <span>Sewa Tenda Fisik:</span>
+                                <span id="sumHarga" class="font-bold text-gray-900">Rp 0</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-gray-50 pt-2.5">
+                                <span>Belanja Set BBQ:</span>
+                                <span id="sumBbq" class="font-bold text-shopee-orange">Rp 0</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-dashed border-gray-200 pt-4 mt-2">
+                                <span class="font-bold text-gray-800 text-sm">Total Pokok Tagihan:</span>
+                                <span id="totalBiaya" class="text-lg font-black text-hijau-botol">Rp 0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="detailModal" class="fixed inset-0 bg-black/60 backdrop-blur-md hidden justify-center items-center z-50 p-4 opacity-0 transition-all duration-300" onclick="closeModalDetail(event)">
+        <div class="bg-white rounded-[32px] max-w-lg w-full overflow-hidden shadow-hover-card scale-95 transition-all duration-300 flex flex-col relative border border-white/20" onclick="event.stopPropagation()">
+            <button onclick="closeModalDetail(event)" class="absolute top-4 right-4 bg-black/40 hover:bg-black/70 backdrop-blur-md text-white w-8 h-8 flex items-center justify-center rounded-full text-sm z-50 transition-colors">&times;</button>
+            <div id="modalImg" class="h-52 bg-cover bg-center relative">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </div>
+            <div class="p-6 space-y-4 max-h-[65vh] overflow-y-auto modal-scroll bg-white text-left">
+                <div>
+                    <h3 id="modalTitle" class="text-lg font-black text-hijau-botol tracking-tight">Nama Paket</h3>
+                    <div id="modalPrice" class="text-sm font-black text-orange-camp bg-orange-50 px-3 py-1 rounded-xl mt-1.5 w-fit">Rp 0</div>
+                </div>
+                <div>
+                    <span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider block mb-2">Fasilitas Standar Tenda:</span>
+                    <ul id="modalFeatures" class="space-y-1.5 text-xs font-semibold text-gray-600 bg-bg-light p-3 rounded-2xl border border-gray-100"></ul>
+                </div>
+                
+                <div id="modalBbqMenuSection" class="bg-orange-50/50 border border-dashed border-shopee-orange/30 rounded-2xl p-4">
+                    <div class="text-shopee-orange font-bold text-xs flex items-center gap-1.5 mb-2">
+                        <i class="fa-solid fa-fire-burner"></i> Tambah Menu / Set BBQ Sekaligus
+                    </div>
+                    <div id="modalBbqItemsContainer" class="bg-white rounded-xl border border-orange-100 p-3 divide-y divide-orange-50"></div>
+                </div>
+
+                <button id="modalActionBtn" class="w-full bg-hijau-botol hover:bg-emerald-900 text-white text-xs font-bold py-3.5 rounded-xl shadow-lg tracking-wider click-bouncy">
+                    PILIH & KONFIRMASI VARIAN INI
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-hijau-botol text-white py-10 px-6 border-t-4 border-orange-camp">
+        <div class="container mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-8 text-left text-xs font-medium">
+            <div class="space-y-2">
+                <div class="text-white text-lg font-black">Posong<span class="text-orange-camp">Camp</span></div>
+                <p class="text-gray-300 leading-relaxed font-light">Nikmati sensasi camping eksklusif premium di lereng gunung di atas lautan awan yang menakjubkan.</p>
+            </div>
+            <div class="space-y-2">
+                <h4 class="text-orange-camp font-black tracking-wider uppercase text-[10px]">Hubungi Admin Lokasi</h4>
+                <p class="text-gray-300">WhatsApp: <strong class="text-white font-bold" id="footerWa">081234567890</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DATA UTAMA APLIKASI (Gambar paket dibedakan agar tidak sama dengan Home f1/f2/f3)
+        const databasePaketPosong = {
+            solo: {
+    id: "solo",
+    nama: "Paket Solo Backpacker",
+    harga: 95000,
+    fitur: "Kapasitas 1 Orang, Tenda Single Dome, Matras Foam, Hammock Santai, Kupon Kopi Hangat",
+    gambar: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=700&q=80"
+  },
+
+  ekonomi: {
+    id: "ekonomi",
+    nama: "Paket Ekonomi",
+    harga: 150000,
+    fitur: "2 Orang, Tenda Dome Standar, Matras, Lampu Camping, Akses Toilet & Mushola",
+    gambar: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=700&q=80"
+  },
+
+  vip: {
+    id: "vip",
+    nama: "Paket VIP Sunrise",
+    harga: 350000,
+    fitur: "4 Orang, Tenda Premium Waterproof, Kasur Angin, Sleeping Bag, Kompor Portable",
+    gambar: "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=700&q=80"
+  },
+
+  glamping: {
+    id: "glamping",
+    nama: "Paket Glamping Luxury",
+    harga: 600000,
+    fitur: "4-5 Orang, Tempat Tidur Queen Size, Listrik, Sarapan Gratis, View Sunrise",
+    gambar: "https://images.unsplash.com/photo-1533873984035-25970ab07461?auto=format&fit=crop&w=700&q=80"
+  },
+
+  family: {
+    id: "family",
+    nama: "Paket Family Ultimate",
+    harga: 850000,
+    fitur: "6-8 Orang, 2 Tenda Besar, BBQ Set, Api Unggun, Air Mineral, Matras Lengkap",
+    gambar: "https://images.unsplash.com/photo-1496080174650-637e3f22fa03?auto=format&fit=crop&w=700&q=80"
+  },
+
+  couple: {
+    id: "couple",
+    nama: "Paket Couple Romantic",
+    harga: 275000,
+    fitur: "2 Orang, Tenda Premium, Dekorasi Romantis, Sleeping Bag, Snack & Kopi",
+    gambar: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=700&q=80"
+  },
+
+  adventure: {
+    id: "adventure",
+    nama: "Paket Adventure",
+    harga: 225000,
+    fitur: "3 Orang, Tenda Dome, Tracking Guide, Headlamp, Trekking Pole",
+    gambar: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80"
+  },
+
+  campervan: {
+    id: "campervan",
+    nama: "Paket Campervan Area",
+    harga: 300000,
+    fitur: "Area Campervan, Listrik, Air Bersih, Toilet, Area Parkir Luas",
+    gambar: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=700&q=80"
+  },
+
+  bbq: {
+    id: "bbq",
+    nama: "Paket BBQ Night",
+    harga: 200000,
+    fitur: "Grill BBQ, Arang, Alat BBQ, Meja Piknik, Jagung Bakar, Marshmallow",
+    gambar: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=700&q=80"
+  },
+
+  bbqPremium: {
+    id: "bbqPremium",
+    nama: "Paket BBQ Premium",
+    harga: 450000,
+    fitur: "BBQ Grill Premium, Daging Sapi, Ayam, Sosis, Seafood, Minuman, Chef BBQ",
+    gambar: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=700&q=80"
+  }
+        };
+
+        const databaseMenuBbq = {
+            premium: {
+        nama: "Paket BBQ Premium",
+        harga: 150000,
+        isi: "300gr Daging Sapi • 250gr Ayam Marinasi • 4 Sosis • Jagung Bakar • Marshmallow • Grill + Arang"
+    },
+
+    family: {
+        nama: "Paket BBQ Family",
+        harga: 275000,
+        isi: "500gr Daging Sapi • 500gr Ayam • 8 Sosis • 10 Bakso • Jagung • Nasi • Soft Drink • Grill"
+    },
+
+    romantic: {
+        nama: "Paket Romantic BBQ",
+        harga: 185000,
+        isi: "250gr Daging Sapi • 250gr Ayam • 2 Sosis • Jagung • Marshmallow • 2 Minuman"
+    },
+
+    vip: {
+        nama: "Paket BBQ VIP",
+        harga: 450000,
+        isi: "700gr Daging Sapi • 700gr Ayam • Seafood • 10 Sosis • Soft Drink • Grill Besar"
+    },
+
+    deluxe: {
+        nama: "Paket BBQ Deluxe",
+        harga: 225000,
+        isi: "400gr Daging Sapi • 300gr Ayam • 6 Sosis • Jagung • Marshmallow • Grill"
+    },
+
+    hemat: {
+        nama: "Paket BBQ Hemat",
+        harga: 95000,
+        isi: "200gr Ayam • 2 Sosis • 4 Bakso • Jagung • Grill Mini"
+    }
+        };
+
+        const whatsappAdmin = "6281234567890";
+
+        window.addEventListener('DOMContentLoaded', () => {    
+            renderDaftarPaketCard();
+            generateDropdownOptions();
+            renderBbqItemsElements();
+            document.getElementById('footerWa').innerText = "+" + whatsappAdmin;
+        });
+
+        function renderDaftarPaketCard() {
+            const grid = document.getElementById('paketGridContainer');
+            grid.innerHTML = '';
+            Object.keys(databasePaketPosong).forEach(key => {
+                const item = databasePaketPosong[key];
+                grid.innerHTML += `
+                    <div onclick="openModalDetail('${key}')" class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-premium hover:shadow-hover-card hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="${item.gambar}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <h4 class="font-extrabold text-gray-800 text-sm tracking-tight group-hover:text-orange-camp transition-colors">${item.nama}</h4>
+                                <p class="text-[11px] text-gray-400 mt-1 line-clamp-2 font-light leading-relaxed">${item.fitur}</p>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-50 text-xs">
+                                <span class="text-orange-camp font-black text-sm">Rp ${item.harga.toLocaleString('id-ID')}</span>
+                                <span class="bg-hijau-botol text-white text-[10px] font-bold px-3 py-2 rounded-xl group-hover:bg-orange-camp transition-colors shadow-sm">Detail & BBQ</span>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function generateDropdownOptions() {
+            const select = document.getElementById('paketSelect');
+            Object.keys(databasePaketPosong).forEach(key => {
+                const item = databasePaketPosong[key];
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.setAttribute('data-price', item.harga);
+                opt.innerText = `${item.nama} (Rp ${item.harga.toLocaleString('id-ID')} /malam)`;
+                select.appendChild(opt);
+            });
+        }
+
+        function renderBbqItemsElements() {
+            const formContainer = document.getElementById('formBbqItemsContainer');
+            const modalContainer = document.getElementById('modalBbqItemsContainer');
+            formContainer.innerHTML = '';
+            modalContainer.innerHTML = '';
+
+            Object.keys(databaseMenuBbq).forEach(idMenu => {
+                const menu = databaseMenuBbq[idMenu];
+                formContainer.innerHTML += `
+                    <div class="flex justify-between items-center py-2.5 first:pt-0 last:pb-0 gap-4">
+                        <div class="flex flex-col min-w-0"><span class="text-xs font-bold text-gray-800 truncate">${menu.nama}</span><span class="text-[11px] font-extrabold text-shopee-orange mt-0.5">Rp ${menu.harga.toLocaleString('id-ID')}</span></div>
+                        <div class="flex items-center bg-bg-light border border-gray-200 rounded-full h-7 overflow-hidden shadow-sm">
+                            <button type="button" class="w-7 h-full font-bold text-shopee-orange hover:bg-orange-50 flex items-center justify-center" onclick="adjustQty('f_bbq_${idMenu}', -1, '${idMenu}')">−</button>
+                            <input type="text" class="w-8 h-full text-center border-none bg-transparent text-xs font-black text-gray-800 outline-none form-bbq-qty" value="0" readonly data-price="${menu.harga}" id="f_bbq_${idMenu}">
+                            <button type="button" class="w-7 h-full font-bold text-shopee-orange hover:bg-orange-50 flex items-center justify-center" onclick="adjustQty('f_bbq_${idMenu}', 1, '${idMenu}')">+</button>
+                        </div>
+                    </div>`;
+
+                modalContainer.innerHTML += `
+                    <div class="flex justify-between items-center py-2 gap-4">
+                        <div class="flex flex-col min-w-0 text-xs font-bold text-gray-800"><span>${menu.nama}</span><span class="text-[11px] text-shopee-orange mt-0.5">Rp ${menu.harga.toLocaleString('id-ID')}</span></div>
+                        <div class="flex items-center bg-bg-light border border-gray-200 rounded-full h-7 overflow-hidden">
+                            <button type="button" class="w-7 h-full font-bold text-shopee-orange hover:bg-orange-50 flex items-center justify-center" onclick="adjustQty('m_bbq_${idMenu}', -1, '${idMenu}')">−</button>
+                            <input type="text" class="w-8 h-full text-center border-none bg-transparent text-xs font-black text-gray-800 outline-none modal-bbq-qty" value="0" readonly data-price="${menu.harga}" id="m_bbq_${idMenu}">
+                            <button type="button" class="w-7 h-full font-bold text-shopee-orange hover:bg-orange-50 flex items-center justify-center" onclick="adjustQty('m_bbq_${idMenu}', 1, '${idMenu}')">+</button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        // HERO SLIDER CONTROLLER
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        let slideInterval = setInterval(() => moveSlide(1), 5000);
+
+        function showSlide(index) {
+            if (index >= slides.length) currentSlideIndex = 0;
+            else if (index < 0) currentSlideIndex = slides.length - 1;
+            else currentSlideIndex = index;
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlideIndex].classList.add('active');
+        }
+
+        function moveSlide(step) {
+            clearInterval(slideInterval);
+            showSlide(currentSlideIndex + step);
+            slideInterval = setInterval(() => moveSlide(1), 5000);
+        }
+
+        function adjustQty(inputId, change, menuId) {
+            const inputEl = document.getElementById(inputId);
+            let currentVal = (parseInt(inputEl.value) || 0) + change;
+            if (currentVal < 0) currentVal = 0;
+            inputEl.value = currentVal;
+
+            if (inputId.startsWith("m_bbq_")) {
+                const targetFormInput = document.getElementById("f_bbq_" + menuId);
+                if (targetFormInput) targetFormInput.value = currentVal;
+            } else if (inputId.startsWith("f_bbq_")) {
+                const targetModalInput = document.getElementById("m_bbq_" + menuId);
+                if (targetModalInput) targetModalInput.value = currentVal;
+            }
+            updateSummary();
+        }
+
+        function openModalDetail(key) {
+            const item = databasePaketPosong[key];
+            if (!item) return;
+
+            document.getElementById("modalTitle").innerText = item.nama;
+            document.getElementById("modalPrice").innerText = "Rp " + item.harga.toLocaleString("id-ID") + " / malam";
+            document.getElementById("modalImg").style.backgroundImage = `url('${item.gambar}')`;
+
+            const featuresList = document.getElementById("modalFeatures");
+            featuresList.innerHTML = "";
+            item.fitur.split(",").forEach(f => {
+                if (f.trim() !== "") featuresList.innerHTML += `<li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-hijau-botol text-[10px]"></i> ${f.trim()}</li>`;
+            });
+
+            const bbqMenuSection = document.getElementById("modalBbqMenuSection");
+            if (key === "family") {
+                bbqMenuSection.classList.add('hidden');
+            } else {
+                bbqMenuSection.classList.remove('hidden');
+                Object.keys(databaseMenuBbq).forEach(idMenu => {
+                    const mainFormInput = document.getElementById("f_bbq_" + idMenu);
+                    const modalInput = document.getElementById("m_bbq_" + idMenu);
+                    if (mainFormInput && modalInput) modalInput.value = mainFormInput.value;
+                });
+            }
+
+            document.getElementById("modalActionBtn").onclick = function() {
+                closeModalDetail();
+                document.getElementById("paketSelect").value = key;
+                updateSummary();
+                document.getElementById("booking").scrollIntoView({ behavior: 'smooth' });
+            };
+
+            const modalWrapper = document.getElementById("detailModal");
+            modalWrapper.classList.remove('hidden');
+            modalWrapper.classList.add('flex');
+            setTimeout(() => {
+                modalWrapper.classList.remove('opacity-0');
+                modalWrapper.querySelector('.scale-95').classList.remove('scale-95');
+            }, 20);
+        }
+
+        function closeModalDetail(e) {
+            if (e) e.stopPropagation();
+            const modalWrapper = document.getElementById("detailModal");
+            modalWrapper.classList.add('opacity-0');
+            modalWrapper.querySelector('.max-w-lg').classList.add('scale-95');
+            setTimeout(() => { modalWrapper.classList.add('hidden'); modalWrapper.classList.remove('flex'); }, 300);
+        }
+
+        function updateSummary() {
+            const selectElement = document.getElementById("paketSelect");
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const basePrice = parseInt(selectedOption.getAttribute("data-price")) || 0;
+            const duration = parseInt(document.getElementById("fDurasi").value) || 1;
+            const selectedKey = selectElement.value;
+            const bbqWrapper = document.getElementById("formBbqWrapper");
+            let totalBbqPrice = 0;
+
+            if (selectedKey === "family") {
+                bbqWrapper.style.opacity = "0.4";
+                bbqWrapper.style.pointerEvents = "none";
+                Object.keys(databaseMenuBbq).forEach(idMenu => {
+                    const fInput = document.getElementById("f_bbq_" + idMenu);
+                    if (fInput) fInput.value = 0;
+                });
+            } else {
+                bbqWrapper.style.opacity = "1";
+                bbqWrapper.style.pointerEvents = "auto";
+                document.querySelectorAll(".form-bbq-qty").forEach(input => {
+                    let qty = parseInt(input.value) || 0;
+                    if (qty > 0) totalBbqPrice += parseInt(input.getAttribute('data-price')) * qty;
+                });
+            }
+
+            if (basePrice > 0) {
+                const totalTentPrice = basePrice * duration;
+                document.getElementById("sumPaket").innerText = selectedOption.text.split(" (")[0];
+                document.getElementById("sumHarga").innerText = "Rp " + totalTentPrice.toLocaleString("id-ID");
+                document.getElementById("sumBbq").innerText = (selectedKey === "family") ? "Sudah Include" : "Rp " + totalBbqPrice.toLocaleString("id-ID");
+                document.getElementById("totalBiaya").innerText = "Rp " + (totalTentPrice + totalBbqPrice).toLocaleString("id-ID");
+            } else {
+                document.getElementById("sumPaket").innerText = "Menunggu pilihan...";
+                document.getElementById("sumHarga").innerText = "Rp 0";
+                document.getElementById("sumBbq").innerText = "Rp 0";
+                document.getElementById("totalBiaya").innerText = "Rp 0";
+            }
+        }
+
+        function prosesFormBooking(event) {
+            event.preventDefault();
+            const nama = document.getElementById('fNama').value.trim();
+            const telepon = document.getElementById('fTelepon').value.trim();
+            const idPaket = document.getElementById('paketSelect').value;
+            const durasi = parseInt(document.getElementById('fDurasi').value) || 1;
+            const tanggal = document.getElementById('fTanggal').value;
+            const catatan = document.getElementById('fCatatan').value.trim();
+
+            if (!idPaket) return alert("Silakan pilih varian tenda!");
+
+            const detailPaket = databasePaketPosong[idPaket];
+            const biayaTenda = detailPaket.harga * durasi;
+            let biayaBbqTotal = 0;
+            let arrayBbqTerpilih = [];
+
+            if (idPaket !== 'family') {
+                Object.keys(databaseMenuBbq).forEach(idMenu => {
+                    const inputVal = parseInt(document.getElementById("f_bbq_" + idMenu).value) || 0;
+                    if (inputVal > 0) {
+                        biayaBbqTotal += databaseMenuBbq[idMenu].harga * inputVal;
+                        arrayBbqTerpilih.push(`${databaseMenuBbq[idMenu].nama} (${inputVal}x)`);
+                    }
+                });
+            } else {
+                arrayBbqTerpilih.push("Semua Menu BBQ (Include Paket Family)");
+            }
+
+            const totalBayar = biayaTenda + biayaBbqTotal;
+            const kodeBooking = "PSG-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+
+            document.getElementById('rKode').innerText = kodeBooking;
+            document.getElementById('rNama').innerText = nama;
+            document.getElementById('rTelepon').innerText = telepon;
+            document.getElementById('rPaket').innerText = detailPaket.nama;
+            document.getElementById('rDurasi').innerText = `${durasi} Malam`;
+            document.getElementById('rTanggal').innerText = tanggal;
+            document.getElementById('rTotal').innerText = "Rp " + totalBayar.toLocaleString('id-ID');
+
+            const listBbqUl = document.getElementById('rBbqList');
+            listBbqUl.innerHTML = '';
+            arrayBbqTerpilih.length > 0 ? arrayBbqTerpilih.forEach(text => { listBbqUl.innerHTML += `<li class="font-semibold text-gray-800"><i class="fa-solid fa-fire text-shopee-orange text-[9px]"></i> ${text}</li>`; }) : listBbqUl.innerHTML = '<li class="text-gray-400 italic">Tidak ada</li>';
+
+            const cBox = document.getElementById('rCatatanBox');
+            if (catatan) { cBox.innerText = `Catatan: "${catatan}"`; cBox.classList.remove('hidden'); } else { cBox.classList.add('hidden'); }
+
+            const waText = `Halo Admin, konfirmasi booking:\n\n*Kode:* ${kodeBooking}\n*Nama:* ${nama}\n*Paket:* ${detailPaket.nama}\n*Check-In:* ${tanggal}\n*Total:* Rp ${totalBayar.toLocaleString('id-ID')}`;
+            document.getElementById('rWaBtn').href = `https://wa.me/${whatsappAdmin}?text=${encodeURIComponent(waText)}`;
+
+            const receipt = document.getElementById('receiptSection');
+            receipt.classList.remove('hidden');
+            receipt.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
